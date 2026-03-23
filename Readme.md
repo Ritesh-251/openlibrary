@@ -1,25 +1,21 @@
 # Open Library
-🌍 Read this in other languages: [简体中文](Readme_chinese.md) | [Español](Readme_es.md) | [Tiếng Việt](Readme_vn.md)
-
 
 ![Python Build](https://github.com/internetarchive/openlibrary/actions/workflows/python_tests.yml/badge.svg)
 ![JS Build](https://github.com/internetarchive/openlibrary/actions/workflows/javascript_tests.yml/badge.svg)
-[![Join the chat at https://gitter.im/theopenlibrary/Lobby](https://badges.gitter.im/theopenlibrary/Lobby.svg)](https://gitter.im/theopenlibrary/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Open in Gitpod](https://img.shields.io/badge/Contribute%20with-Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/internetarchive/openlibrary/)
 [![contributors](https://img.shields.io/github/contributors/internetarchive/openlibrary.svg)](https://github.com/internetarchive/openlibrary/graphs/contributors)
 
 [Open Library](https://openlibrary.org) is an open, editable library catalog, building towards a web page for every book ever published.
 
-Are you looking to get started? [This is the guide](https://github.com/internetarchive/openlibrary/blob/master/CONTRIBUTING.md) you are looking for. You may wish to learn more about [Google Summer of Code (GSoC)?](https://github.com/internetarchive/openlibrary/wiki/Google-Summer-of-Code) or [Hacktoberfest](https://github.com/internetarchive/openlibrary/wiki/Hacktoberfest).
+Are you looking to get started? [This is the guide](https://github.com/internetarchive/openlibrary/blob/master/CONTRIBUTING.md) you are looking for. You may wish to learn more about [Google Summer of Code (GSoC)?](https://docs.openlibrary.org/everyone/google-summer-of-code.html) or [Hacktoberfest](https://docs.openlibrary.org/everyone/hacktoberfest.html).
 
 ## Table of Contents
    - [Overview](#overview)
    - [Installation](#installation)
    - [Code Organization](#code-organization)
    - [Architecture](#architecture)
-     - [The Frontend](https://github.com/internetarchive/openlibrary/wiki/Frontend-Guide)
+     - [The Frontend](https://docs.openlibrary.org/developers/frontend/frontend-guide.html)
      - [The Backend](#the-backend)
-     - [The Service Architecture](https://github.com/internetarchive/openlibrary/wiki/Production-Service-Architecture)
+     - [The Service Architecture](https://docs.openlibrary.org/advanced/production-service-architecture.html)
    - [Developer's Guide](#developers-guide)
    - [Running Tests](#running-tests)
    - [Contributing](#contributing)
@@ -45,14 +41,10 @@ Run `docker compose up` and visit http://localhost:8080
 Need more details? Checkout the [Docker instructions](https://github.com/internetarchive/openlibrary/blob/master/docker/README.md)
 or [video tutorial](https://archive.org/embed/openlibrary-developer-docs/openlibrary-docker-set-up.mp4).
 
-***Alternatively***, if you do not want to set up Open Library on your local computer, try Gitpod!
-This lets you work on Open Library entirely in your browser without having to install anything on your personal computer.
-Warning: This integration is still experimental.
-[![Open In Gitpod](https://img.shields.io/badge/Contribute%20with-Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/internetarchive/openlibrary/)
 
 ### Developer's Guide
 
-You can also find more information regarding Developer Documentation for Open Library in the Open Library [Wiki](https://github.com/internetarchive/openlibrary/wiki/).
+You can also find more information regarding Developer Documentation for Open Library in the Open Library [Wiki](https://docs.openlibrary.org/developers/).
 
 ## Code Organization
 
@@ -78,7 +70,7 @@ If you want to dive into the source code for Infogami, see the [Infogami repo](h
 
 ## Running tests
 
-Open Library tests can be run using docker. Kindly look up on our [Testing Document](https://github.com/internetarchive/openlibrary/wiki/Testing) for more details.
+Open Library tests can be run using docker. Kindly look up on our [Testing Document](https://docs.openlibrary.org/developers/tools/testing.html) for more details.
 
 ```
 docker compose run --rm home make test
@@ -99,7 +91,7 @@ There are many ways volunteers can contribute to the Open Library project, from 
 - **Data Contributions:** Learn how to contribute to our catalog and help improve book data on Open Library. Visit our [volunteer page](https://openlibrary.org/volunteer) for more information.
 
 ### Community Engagement
-- **Join our Community Calls:** Open Library hosts weekly community and design calls. Check the [community call schedule](https://github.com/internetarchive/openlibrary/wiki/Community-Call) for times and details.
+- **Join our Community Calls:** Open Library hosts weekly community and design calls. Check the [community call schedule](https://docs.openlibrary.org/everyone/community-call.html) for times and details.
 - **Ask Questions:** If you have any questions, request an invitation to our Slack channel on our [volunteers page](https://openlibrary.org/volunteer).
 
 For more detailed information, refer to the [Contributing Guide](https://github.com/internetarchive/openlibrary/blob/master/CONTRIBUTING.md).

@@ -378,12 +378,13 @@ class InternetArchiveProvider(AbstractBookProvider[IALiteMetadata]):
         if not access:
             return []
 
-        acqs = [
+        identifier = self.get_best_identifier(db_edition or ed_or_solr)
+        acquisitions = [
             Acquisition(
                 access=access,
                 format='web',
                 price=None,
-                url=f'https://archive.org/details/{self.get_best_identifier(db_edition or ed_or_solr)}?view=theater&wrapper=false',
+                url=f'https://archive.org/details/{identifier}?view=theater&wrapper=false',
                 provider_name=self.short_name,
                 label='Read Online',
             )
@@ -397,7 +398,7 @@ class InternetArchiveProvider(AbstractBookProvider[IALiteMetadata]):
 
         if edition:
             if pdf := edition.get_ia_download_link('.pdf'):
-                acqs.append(
+                acquisitions.append(
                     Acquisition(
                         access=access,
                         format='pdf',
@@ -408,7 +409,7 @@ class InternetArchiveProvider(AbstractBookProvider[IALiteMetadata]):
                     )
                 )
             if epub := edition.get_ia_download_link('.epub'):
-                acqs.append(
+                acquisitions.append(
                     Acquisition(
                         access=access,
                         format='epub',
@@ -419,7 +420,7 @@ class InternetArchiveProvider(AbstractBookProvider[IALiteMetadata]):
                     )
                 )
             if mobi := edition.get_ia_download_link('.mobi'):
-                acqs.append(
+                acquisitions.append(
                     Acquisition(
                         access=access,
                         format='mobi',
@@ -430,7 +431,7 @@ class InternetArchiveProvider(AbstractBookProvider[IALiteMetadata]):
                     )
                 )
             if txt := edition.get_ia_download_link('_djvu.txt'):
-                acqs.append(
+                acquisitions.append(
                     Acquisition(
                         access=access,
                         format='txt',
@@ -441,7 +442,7 @@ class InternetArchiveProvider(AbstractBookProvider[IALiteMetadata]):
                     )
                 )
 
-            acqs.append(
+            acquisitions.append(
                 Acquisition(
                     access=access,
                     format='web',
@@ -451,8 +452,39 @@ class InternetArchiveProvider(AbstractBookProvider[IALiteMetadata]):
                     label='DAISY',
                 )
             )
+        elif access == 'open-access':
+            download_files = self._get_ia_download_files(identifier)
+            for fmt, filename in download_files.items():
+                acquisitions.append(
+                    Acquisition(
+                        access='open-access',
+                        format=fmt,
+                        price=None,
+                        url=f'https://archive.org/download/{identifier}/{filename}',
+                        provider_name=self.short_name,
+                        label='PDF' if fmt == 'pdf' else 'ePub',
+                    )
+                )
 
-        return acqs
+        return acquisitions
+
+    def _get_ia_download_files(
+        self, identifier: str
+    ) -> dict[Literal['pdf', 'epub'], str]:
+        """
+        Get default download file names for IA items.
+
+        Assumes standard IA naming convention where files are named
+        {identifier}.pdf and {identifier}.epub. This avoids making
+        individual network requests for each item's metadata.
+
+        Returns a dict mapping format to filename, e.g.:
+        {'pdf': 'mybook.pdf', 'epub': 'mybook.epub'}
+        """
+        return {
+            'pdf': f'{identifier}.pdf',
+            'epub': f'{identifier}.epub',
+        }
 
 
 class LibriVoxProvider(AbstractBookProvider):
@@ -1104,7 +1136,7 @@ def get_best_edition(
         ],
     )
 
-    return best if best else (None, None)
+    return best or (None, None)
 
 
 def get_solr_keys() -> list[str]:
